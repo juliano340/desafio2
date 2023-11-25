@@ -1,5 +1,3 @@
-// main.dart
-
 import 'package:flutter/material.dart';
 import 'book.dart';
 import 'book_service.dart';
@@ -25,6 +23,9 @@ class _BookListScreenState extends State<BookListScreen> {
   final BookService _bookService = BookService();
   late Future<List<Book>> _books;
 
+  // Mova a lista de livros para o nível da classe.
+  List<Book> books = [];
+
   @override
   void initState() {
     super.initState();
@@ -49,15 +50,19 @@ class _BookListScreenState extends State<BookListScreen> {
               child: Text('Erro: ${snapshot.error}'),
             );
           } else {
+            // Atualize a lista de livros com os dados recebidos.
+            books = snapshot.data!;
+
             return ListView.builder(
-              itemCount: snapshot.data!.length,
+              itemCount: books.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(snapshot.data![index].title),
-                  subtitle: Text(snapshot.data![index].author),
-                  leading: Image.network(snapshot.data![index].coverUrl),
+                  title: Text(books[index].title),
+                  subtitle: Text(books[index].author),
+                  leading: Image.network(books[index].coverUrl),
                   onTap: () {
-                    // Adicione aqui a navegação para a página de detalhes, por exemplo.
+                    // Chama o método download ao tocar na capa do livro.
+                    books[index].download();
                   },
                 );
               },
