@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -9,7 +8,7 @@ class Book {
   final String author;
   final String coverUrl;
   final String downloadUrl;
-  bool isFavorite; // Adição da propriedade isFavorite.
+  bool isFavorite;
 
   Book({
     required this.id,

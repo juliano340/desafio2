@@ -64,7 +64,27 @@ class _BookListScreenState extends State<BookListScreen> {
                 return ListTile(
                   title: Text(books[index].title),
                   subtitle: Text(books[index].author),
-                  leading: Image.network(books[index].coverUrl),
+                  leading: GestureDetector(
+                    onTap: () {
+                      // Agora o download é acionado ao tocar na capa
+                      books[index].download().then((_) {
+                        // Após o download, exibe uma mensagem
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Download concluído para ${books[index].title}'),
+                          ),
+                        );
+                      }).catchError((error) {
+                        // Em caso de erro, exibe uma mensagem de erro
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Erro ao baixar o livro: $error'),
+                          ),
+                        );
+                      });
+                    },
+                    child: Image.network(books[index].coverUrl),
+                  ),
                   trailing: IconButton(
                     icon: Icon(
                       books[index].isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -72,7 +92,6 @@ class _BookListScreenState extends State<BookListScreen> {
                     ),
                     onPressed: () {
                       setState(() {
-                        books[index].download();
                         books[index].isFavorite = !books[index].isFavorite;
 
                         if (books[index].isFavorite) {
@@ -121,7 +140,19 @@ class FavoriteBooksScreen extends StatelessWidget {
             subtitle: Text(favoriteBooks[index].author),
             leading: Image.network(favoriteBooks[index].coverUrl),
             onTap: () {
-              favoriteBooks[index].download();
+              favoriteBooks[index].download().then((_) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Download concluído para ${favoriteBooks[index].title}'),
+                  ),
+                );
+              }).catchError((error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Erro ao baixar o livro: $error'),
+                  ),
+                );
+              });
             },
           );
         },
