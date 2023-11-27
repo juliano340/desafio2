@@ -22,9 +22,8 @@ class BookListScreen extends StatefulWidget {
 class _BookListScreenState extends State<BookListScreen> {
   final BookService _bookService = BookService();
   late Future<List<Book>> _books;
-
-  // Mova a lista de livros para o nível da classe.
   List<Book> books = [];
+  List<Book> favoriteBooks = [];
 
   @override
   void initState() {
@@ -37,6 +36,14 @@ class _BookListScreenState extends State<BookListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lista de Ebooks'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              _navigateToFavoriteScreen();
+            },
+          ),
+        ],
       ),
       body: FutureBuilder<List<Book>>(
         future: _books,
@@ -50,9 +57,7 @@ class _BookListScreenState extends State<BookListScreen> {
               child: Text('Erro: ${snapshot.error}'),
             );
           } else {
-            // Atualize a lista de livros com os dados recebidos.
             books = snapshot.data!;
-
             return ListView.builder(
               itemCount: books.length,
               itemBuilder: (context, index) {
@@ -60,14 +65,65 @@ class _BookListScreenState extends State<BookListScreen> {
                   title: Text(books[index].title),
                   subtitle: Text(books[index].author),
                   leading: Image.network(books[index].coverUrl),
-                  onTap: () {
-                    // Chama o método download ao tocar na capa do livro.
-                    books[index].download();
-                  },
+                  trailing: IconButton(
+                    icon: Icon(
+                      books[index].isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: books[index].isFavorite ? Colors.red : null,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        books[index].download();
+                        books[index].isFavorite = !books[index].isFavorite;
+
+                        if (books[index].isFavorite) {
+                          favoriteBooks.add(books[index]);
+                        } else {
+                          favoriteBooks.remove(books[index]);
+                        }
+                      });
+                    },
+                  ),
                 );
               },
             );
           }
+        },
+      ),
+    );
+  }
+
+  void _navigateToFavoriteScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FavoriteBooksScreen(favoriteBooks),
+      ),
+    );
+  }
+}
+
+class FavoriteBooksScreen extends StatelessWidget {
+  final List<Book> favoriteBooks;
+
+  FavoriteBooksScreen(this.favoriteBooks);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Livros Favoritos'),
+      ),
+      body: ListView.builder(
+        itemCount: favoriteBooks.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(favoriteBooks[index].title),
+            subtitle: Text(favoriteBooks[index].author),
+            leading: Image.network(favoriteBooks[index].coverUrl),
+            onTap: () {
+              favoriteBooks[index].download();
+            },
+          );
         },
       ),
     );
