@@ -1,16 +1,40 @@
-# desafio2
+# Desafio 2 - Livros
 
-A new Flutter project.
+Um app para leitura dos seus ebooks favoritos.
 
-## Getting Started
+## Uso do APK
 
-This project is a starting point for a Flutter application.
+1. Baixe o APK do [link para o arquivo APK](link-para-o-seu-apk).
+2. Abra o APK no seu dispositivo Android.
+3. Instale o aplicativo.
 
-A few resources to get you started if this is your first Flutter project:
+## Abertura do Projeto no Android Studio
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone este repositório.
+2. Abra o Android Studio.
+3. No menu principal, clique em `File` -> `Open...`.
+4. Navegue até a pasta do projeto e selecione o diretório.
+5. Aguarde o Android Studio carregar o projeto.
+6. Execute o aplicativo no emulador ou dispositivo Android conectado.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Funcionalidades Principais
+
+### Lista de Livros
+
+- Acesse uma ampla variedade de livros disponíveis para download.
+- Cada livro é representado por uma capa, facilitando a identificação visual.
+
+### Download de Livros
+
+- Realize o download de um livro clicando na capa do livro desejado.
+
+### Favoritos
+
+- Favorite seus livros preferidos para acesso rápido e fácil.
+- Gerencie sua lista de favoritos a partir de uma área dedicada.
+
+### Visualização de EPUB
+
+- Explore a lista de livros favoritos e visualize o conteúdo em formato EPUB. (Esta funcionalidade está em desenvolvimento.)
+
+
