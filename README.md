@@ -4,7 +4,7 @@ Um app para leitura dos seus ebooks favoritos.
 
 ## Uso do APK
 
-1. Baixe o APK do [link para o arquivo APK](link-para-o-seu-apk).
+1. Baixe o APK do [https://drive.google.com/drive/folders/1FKShQb74Mv9HdAmcAtE329TX_wMVQd1a?usp=sharing].
 2. Abra o APK no seu dispositivo Android.
 3. Instale o aplicativo.
 
