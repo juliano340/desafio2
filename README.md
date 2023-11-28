@@ -37,4 +37,7 @@ Um app para leitura dos seus ebooks favoritos.
 
 - Explore a lista de livros favoritos e visualize o conteúdo em formato EPUB. (Esta funcionalidade está em desenvolvimento.)
 
+## Notas Adicionais
+
+- A visualização de EPUB ainda não foi implementada, mas está nos planos futuros de desenvolvimento.
 
